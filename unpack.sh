@@ -11,6 +11,15 @@ destdir=$2
 base=$3
 xpath=$4
 
+if [ -z "$pkg" -o -z "$destdir" -o -z "$base" -o -z "$xpath" ]; then
+    echo "Usage: $0 <package-path> <dest-dir> <xml-base-filename> <xpath>"
+    echo "          <package-path> is the path and filename of the package to unpack"
+    echo "          <dest-dir> is the location to unpack it, such as 'extensions', 'modules', 'rulesets'"
+    echo "          <xml-base-filename> is the basename of the XML file for the package"
+    echo "          <xpath> is the XPath query to the name of the package"
+    exit 1
+fi
+
 echo "Unpacking $pkg to $destdir ..."
 tmpdir=$(mktemp -d)
 unzip -qq "$pkg" -d "$tmpdir"
